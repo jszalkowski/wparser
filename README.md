@@ -20,7 +20,7 @@ Feel free to use this parser, contribute to it (by fixing or adding stuff), give
     - Number of all HTML elements used on a website
 * 'headings'
     - type: number
-    - Number of headings (<h1>, <h2> etc)
+    - Number of headings (`<h1>`, `<h2>` etc)
 * 'paragraphs'
     - type: number
     - Number of <p> HTML tags used on website
