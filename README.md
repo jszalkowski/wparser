@@ -2,7 +2,7 @@
 
 ## Purpose
 
-I need this parser to get the data which I'll need for my final exam. While writing it, I've decided to open source it so that maybe someone else can also find it useful or even contribute.
+I've needed this parser to get the data which I'll need for my final exam. While writing it, I've decided to open source it so that maybe someone else can also find it useful or even contribute.
 I doubt someone will find all those attributes useful but at least maybe you can get an idea of how to pull some specific data from websites.
 I still didn't implement all the attributes that I've wanted, because for some of them I still didn't manage to find a solution.
 Feel free to use this parser, contribute to it (by fixing or adding stuff), give me suggestions for better implementation or whatever else you want.
@@ -145,7 +145,7 @@ Feel free to use this parser, contribute to it (by fixing or adding stuff), give
     - type: boolean
     - Check whether no-js is used for older browsers
 
-## Still not implemented list of attributes
+## Still not implemented attributes
 
 * preprocessors
     - type: boolean
