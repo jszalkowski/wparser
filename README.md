@@ -7,6 +7,8 @@ I doubt someone will find all those attributes useful but at least maybe you can
 I still didn't implement all the attributes that I've wanted, because for some of them I still didn't manage to find a solution.
 Feel free to use this parser, contribute to it (by fixing or adding stuff), give me suggestions for better implementation or whatever else you want.
 
+This parser is using Phantomjs and it's basic functionality is to extract data from a given website. Parser is executed as an command and it receives .csv file (with list of websites) as an argument. As an output, it builds an .csv file with list of all the attributes and with received values for each given website. More technical explenation is given later below.
+
 ## List of attributes
 
 * url
