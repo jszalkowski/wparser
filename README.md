@@ -1,13 +1,13 @@
 # wparser
 
-## Purpose
+## About
+
+This parser is using Phantomjs and it's basic functionality is to extract data from a given website. Parser can be runned as an command and it accepts .csv file (with list of urls) as an input arguments. As an result, it builds an .csv file with a list of all the attributes and with received values for each given website. More technical explenation is given later below.
 
 I've needed this parser to get the data which I'll need for my final exam. While writing it, I've decided to open source it so that maybe someone else can also find it useful or even contribute.
 I doubt someone will find all those attributes useful but at least maybe you can get an idea of how to pull some specific data from websites.
 I still didn't implement all the attributes that I've wanted, because for some of them I still didn't manage to find a solution.
 Feel free to use this parser, contribute to it (by fixing or adding stuff), give me suggestions for refactoring, better implementation or whatever else you want.
-
-This parser is using Phantomjs and it's basic functionality is to extract data from a given website. Parser is executed as an command and it receives .csv file (with list of websites) as an argument. As an output, it builds an .csv file with list of all the attributes and with received values for each given website. More technical explenation is given later below.
 
 ## List of attributes
 
@@ -199,6 +199,7 @@ Output is CSV file named output.csv, which you'll find in output' directory.
 
 ## TODO
 
-* problem with cross browser requests -> how to properly get some css files? Maybe I can write an service in python or some other language which can handle this?
+* Parser still has problems with getting some CSS files (cross domain requests). I still didn't found any proper way to get CSS files. Maybe this can be handled with some external service written in python or something like that?
+* Parser also has problems with some JS that it tries to compile from received urls - still don't know how to properly handle this
 * implement color-thief - so that we can extract color pallete, most used colors etc - this data will be extracted from the screenshots
 * use confess.js to get a list of requests etc - https://github.com/jamesgpearce/confess
