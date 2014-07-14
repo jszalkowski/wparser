@@ -83,7 +83,7 @@ Feel free to use this parser, contribute to it (by fixing or adding stuff), give
 * twitter_bootstrap
     - type: boolean
     - Check whether Twitter Bootstrap is used
-* html5'
+* html5
     - type: boolean
     - Check whether HTML5 tags are used
 * html5_tags
