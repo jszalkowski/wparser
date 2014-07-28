@@ -204,7 +204,7 @@ cp config.sample.py config.py
     - example: /home/user/wparserjspath/dev/wparser'
 * CSV_PATH
     - full path to CSS file
-    - example: '/home/user/dev/wparser/test/test.csv'
+    - example: '/home/user/dev/wparser/input/test.csv'
 
 ## Run
 
@@ -214,7 +214,7 @@ python wparser.py
 
 ## Input
 
-As an input to a parser, as an parameter you give CSV file, for which path is configured in config.py. You can find an example of file in [test/test.csv](test/test.csv). Be sure to keep the same structure.
+As an input to a parser, as an parameter you give CSV file, for which path is configured in config.py. You can find an example of file in [input/test.csv](input/test.csv). Be sure to keep the same structure.
 
 ## Output
 

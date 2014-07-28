@@ -58,7 +58,7 @@ def colors(reader_list):
             if index == 0:
                 dominant_color = current_color
 
-            colors.append(current_color) # convert those too?
+            colors.append(current_color)
             index += 1
 
         row.append(len(colors))

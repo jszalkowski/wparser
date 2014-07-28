@@ -57,7 +57,7 @@ var attributes = [
 
 function readCsvFile() {
     if (!args[1]) {
-        console.log('Warning: Script should be called as: "phantomjs wparser.js test.csv".')
+        console.log('Warning: Script should be called as: "phantomjs wparser.js input/test.csv".')
         phantom.exit(0);
     }
 
@@ -128,13 +128,13 @@ function handlePage(url) {
                 console.log('console> ' + msg);
             };
 
-            var screenshotPath = 'screenshots/' + page.url.replace(/[^\w\s!?]/g,'') + '.png';
+            var screenshotPath = 'screenshots/' + url.replace(/[^\w\s!?]/g,'') + '.png';
 
             if (!fs.exists(screenshotPath)) {
                 page.render(screenshotPath, {format: 'png', quality: '100'});
             }
 
-            var pageData = page.evaluate(function(handlePageData, page, attributes, screenshotPath) {
+            var pageData = page.evaluate(function(handlePageData, url, page, attributes) {
                 var cssRequests = [];
                 var cssContents = [];
                 var pageData = {};
@@ -218,8 +218,8 @@ function handlePage(url) {
                     });
                 }
 
-                return handlePageData(page, cssContents, attributes, screenshotPath);
-            }, handlePageData, page, attributes, screenshotPath);
+                return handlePageData(page, url, cssContents, attributes);
+            }, handlePageData, url, page, attributes);
 
             allWebsitesData.push(pageData);
 
@@ -231,10 +231,11 @@ function handlePage(url) {
 
 /**
  * @param {Object} page
+ * @param {string} url
  * @param {array} cssContents
  * @param {array} attributes
  */
-var handlePageData = function(page, cssContents, attributes, screenshotPath) {
+var handlePageData = function(page, url, cssContents, attributes) {
     var pageData = {};
     var html = page.content;
     var cleanHtml = $(document.documentElement).clone().find("script,noscript,style,link,meta,head").remove().end().html();
@@ -260,7 +261,7 @@ var handlePageData = function(page, cssContents, attributes, screenshotPath) {
     }
 
     // pageData
-    pageData['url'] = page.url;
+    pageData['url'] = url;
 
     pageData['text'] = $(cleanHtml).text().length;
 
