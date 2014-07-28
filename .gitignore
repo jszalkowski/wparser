@@ -3,3 +3,10 @@
 
 !.gitkeep
 /node_modules
+
+config.py
+
+*.pyc
+
+# custom files
+test/websites_list.csv

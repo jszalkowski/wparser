@@ -53,7 +53,7 @@ var attributes = [
 
 // TODO: Not implemented
 // 'preprocessors', 'frameworks', 'cms_used', 'color_palette', 'colors'
-// 'dominant_color', 'css_errors', 'html_errors', 'sprite_images'
+// 'dominant_color', 'sprite_images'
 
 function readCsvFile() {
     if (!args[1]) {
@@ -90,7 +90,7 @@ function writeCsvFile() {
 
     // headers
     for (var i=0; i<attributes.length; i++) {
-        content += attributes[i] + ',';
+        content += '"' + attributes[i] + '",';
     }
     content = content.substring(0, content.length - 1);
 
@@ -121,10 +121,7 @@ function handlePage(url) {
             console.log('Processing: ' + url);
             console.log('------------------------------------------');
 
-            page.injectJs('libs/jquery-2.1.1.min.js');
-
-            // page.injectJs('libs/quantize.js');
-            // page.injectJs('libs/color-thief.min.js');
+            page.injectJs('js-libs/jquery-2.1.1.min.js');
 
             // catches all messages outputed to the console
             page.onConsoleMessage = function(msg, line, source) {
@@ -137,7 +134,7 @@ function handlePage(url) {
                 page.render(screenshotPath, {format: 'png', quality: '100'});
             }
 
-            var pageData = page.evaluate(function(handlePageData, page, attributes) {
+            var pageData = page.evaluate(function(handlePageData, page, attributes, screenshotPath) {
                 var cssRequests = [];
                 var cssContents = [];
                 var pageData = {};
@@ -221,8 +218,8 @@ function handlePage(url) {
                     });
                 }
 
-                return handlePageData(page, cssContents, attributes);
-            }, handlePageData, page, attributes);
+                return handlePageData(page, cssContents, attributes, screenshotPath);
+            }, handlePageData, page, attributes, screenshotPath);
 
             allWebsitesData.push(pageData);
 
@@ -237,7 +234,7 @@ function handlePage(url) {
  * @param {array} cssContents
  * @param {array} attributes
  */
-var handlePageData = function(page, cssContents, attributes) {
+var handlePageData = function(page, cssContents, attributes, screenshotPath) {
     var pageData = {};
     var html = page.content;
     var cleanHtml = $(document.documentElement).clone().find("script,noscript,style,link,meta,head").remove().end().html();
@@ -294,16 +291,6 @@ var handlePageData = function(page, cssContents, attributes) {
 
         return fontSizes.length;
     }());
-
-    // TODO: finish by using color-thief
-    /*pageData['colors'] = (function() {
-        return '';
-    }());*/
-
-    // TODO: finish by using color-thief
-    /*pageData['dominant_color'] = (function() {
-        return '';
-    }());*/
 
     pageData['links'] = $('a').length;
 
@@ -368,16 +355,6 @@ var handlePageData = function(page, cssContents, attributes) {
     pageData['has_meta_keywords'] = $('meta[name="keywords"]').length > 0;
 
     pageData['has_meta_description'] = $('meta[name="description"]').length > 0;
-
-    // TODO: Don't know how yet http://jigsaw.w3.org/css-validator/validator?uri=http%3A%2F%2Fwww.w3.org%2F&warning=0&profile=css2
-    /*pageData['css_errors'] = (function() {
-        return;
-    }());*/
-
-    // TODO: Don't know how yet http://validator.w3.org/docs/api.html
-    /*pageData['html_errors'] = (function() {
-        return;
-    }());*/
 
     pageData['rss'] = $('link[type="application/rss+xml"]').length > 0;
 
@@ -518,7 +495,7 @@ function nextPage() {
 
     if (!url) {
         writeCsvFile();
-        phantom.exit(0);
+        phantom.exit(1);
     }
 
     handlePage(url);

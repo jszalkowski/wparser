@@ -1,0 +1,2 @@
+colorific==0.2.2
+webcolors==1.4

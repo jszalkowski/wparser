@@ -146,6 +146,15 @@ Feel free to use this parser, contribute to it (by fixing or adding stuff), give
 * no_js
     - type: boolean
     - Check whether no-js is used for older browsers
+* html_errors
+    - type: number
+    - Number of HTML errors
+* colors
+    - type: number
+    - Number of different colors used in CSS
+* dominant_color
+    - type: string
+    - Dominant color used on a website
 
 ## Still not implemented attributes
 
@@ -158,48 +167,61 @@ Feel free to use this parser, contribute to it (by fixing or adding stuff), give
 * cms_used
     - type: boolean
     - Detect whether website is using some kind of CMS
-* color_palette
-    - type: string
-    - Detect website color palette - based on website screenshot. Should be somehow possible with https://github.com/lokesh/color-thief
-* dominant_color
-    - type: string
-    - Dominant color used on a website
-* colors
-    - type: number
-    - Number of different colors used in CSS
-* css_errors
-    - type: number
-    - Number of errors in CSS files. Should be somehow possible to get this information through w3c validator API
-* html_errors
-    - type: number
-    - Number of HTML errors. Should be somehow possible to get this information through w3c validator API
 * sprite_images
     - type: boolean
     - Detect whether sprite images are used
+* color_palette
+    - type: string
+    - Color palette used on website
 
 ## Requirements
 
-### Set up phantomJS
+### Set up phantomjs (developed with phantomjs 1.9.7)
 
 http://phantomjs.org/download.html
+
+### Python (developed with python 2.7.6)
+
+```
+pip install -r /path/to/requirements.txt
+```
+
+## Configuration
+
+### Copy/Rename config file
+
+```
+cp config.sample.py config.py
+```
+
+### Adjust parameters
+
+* PHANTOMJS_DIRECTORY
+    - path to phantomjs directory
+    - example: '/home/user/phantomjs-1.9.7-linux-x86_64/bin/'
+* WPARSER_DIRECTORY
+    - full path to wparser directory, which is actually current working directory 
+    - example: /home/user/wparserjspath/dev/wparser'
+* CSV_PATH
+    - full path to CSS file
+    - example: '/home/user/dev/wparser/test/test.csv'
 
 ## Run
 
 ```
-phantomjs wparser.js test/test.csv
+python wparser.py
 ```
 
 ## Input
 
-As an input to a parser, as an parameter you give CSV file. You can find an example in [test/test.csv](test/test.csv). Be sure to keep the same structure.
+As an input to a parser, as an parameter you give CSV file, for which path is configured in config.py. You can find an example of file in [test/test.csv](test/test.csv). Be sure to keep the same structure.
 
 ## Output
 
-Output is CSV file named output.csv, which you'll find in output' directory.
+Output is CSV file named output_final.csv, which you'll find in output' directory.
 
 ## TODO
 
 * Parser still has problems with getting some CSS files (cross domain requests). I still didn't found any proper way to get CSS files. Maybe this can be handled with some external service written in python or something like that?
 * Parser also has problems with some JS that it tries to compile from received urls - still don't know how to properly handle this
-* implement color-thief - so that we can extract color pallete, most used colors etc - this data will be extracted from the screenshots
 * use confess.js to get a list of requests etc - https://github.com/jamesgpearce/confess
