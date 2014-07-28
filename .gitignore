@@ -2,11 +2,10 @@
 /output/*
 
 !.gitkeep
-/node_modules
 
 config.py
 
 *.pyc
 
 # custom files
-test/websites_list.csv
+input/websites_list.csv
