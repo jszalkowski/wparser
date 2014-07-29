@@ -2,9 +2,9 @@
 
 ## About
 
-This parser is using PhantomJS and it's basic functionality is to extract data from a given website. Parser can be runned as an command and it accepts .csv file (with list of urls) as an input arguments. As an result, it builds an .csv file with a list of all the attributes and with received values for each given website. More technical explenation is given later below.
+This parser is built with PhantomJS and Python and it's basic functionality is to extract data from a received website. Parser can be runned as an python command and it accepts .csv file (with list of urls) as an input arguments. As an result, it builds an .csv file with a list of all the attributes and with received values for each given website. More technical explenation is given later below.
 
-I've needed this parser to get the data which I'll need for my final exam. While writing it, I've decided to open source it so that maybe someone else can also find it useful or even contribute.
+I've needed this parser to get the data which I'll need for my thesis. While I was working on it, I've decided to open source it so that maybe someone else can also find it useful or even contribute.
 I doubt someone will find all those attributes useful but at least maybe you can get an idea of how to pull some specific data from websites.
 I still didn't implement all the attributes that I've wanted, because for some of them I still didn't manage to find a solution.
 Feel free to use this parser, contribute to it (by fixing or adding stuff), give me suggestions for refactoring, better implementation or whatever else you want.
