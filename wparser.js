@@ -1,3 +1,5 @@
+"use strict";
+
 var fs = require('fs');
 var args = require('system').args;
 var urls = [];
@@ -13,7 +15,7 @@ var attributes = [
     'font_families',
     'font_sizes',
     'links',
-    'divs', 
+    'divs',
     'ids',
     'classes',
     'css_external',
@@ -21,12 +23,12 @@ var attributes = [
     'css_inline',
     'css_declaration_blocks',
     'css_prefixes',
-    'js_sources', 
+    'js_sources',
     'meta_tags',
     'has_meta_keywords',
     'has_meta_description',
     'rss',
-    'import', 
+    'import',
     'twitter_bootstrap',
     'html5_tags',
     'html5',
@@ -38,7 +40,7 @@ var attributes = [
     'included_multimedia',
     'minified_css',
     'font_families_list',
-    'h1_font', 
+    'h1_font',
     'h2_font',
     'h3_font',
     'h4_font',
@@ -50,10 +52,6 @@ var attributes = [
     'css_pseudo_elements',
     'no_js'
 ]; // Need this to have an proper order of attributes
-
-// TODO: Not implemented
-// 'preprocessors', 'frameworks', 'cms_used', 'color_palette', 'colors'
-// 'dominant_color', 'sprite_images'
 
 function readCsvFile() {
     if (!args[1]) {
@@ -71,7 +69,7 @@ function readCsvFile() {
     var line = file_h.readLine();
 
     urls.push(line);
-    while(line) {
+    while (line) {
         line = file_h.readLine();
         urls.push(line);
     }
@@ -80,8 +78,8 @@ function readCsvFile() {
 }
 
 function writeCsvFile() {
-    var content = '';
-    var path = "output/output.csv";
+    var content = '',
+        path = "output/output.csv";
 
     if (allWebsitesData.length === 0) {
         console.log('Warning: There is no content to write.')
@@ -107,9 +105,9 @@ function writeCsvFile() {
 }
 
 function handlePage(url) {
-    var webPage = require('webpage');
-    var page = webPage.create();
-    var width = 1024,
+    var webPage = require('webpage'),
+        page = webPage.create(),
+        width = 1024,
         height = 768;
 
     page.viewportSize = { width: width, height: height };
@@ -134,8 +132,8 @@ function handlePage(url) {
             }
 
             // catches all messages outputed to the console
-            page.onConsoleMessage = function(msg, line, source) {
-                console.log('console> ' + msg);
+            page.onConsoleMessage = function(msg, line) {
+                console.log('console> ' + msg + ', line: ' + line);
             };
 
             var screenshotPath = 'screenshots/' + url.replace(/[^\w\s!?]/g,'') + '.png';
