@@ -121,7 +121,17 @@ function handlePage(url) {
             console.log('Processing: ' + url);
             console.log('------------------------------------------');
 
-            page.injectJs('js-libs/jquery-2.1.1.min.js');
+            // Add jQuery only if it's not already loaded
+            var jqueryLoaded = page.evaluate(function() {
+                if (window.jQuery) {  
+                    return true;
+                }
+                return false;
+            });
+
+            if (!jqueryLoaded) {
+                page.injectJs('js-libs/jquery-2.1.1.min.js');
+            }
 
             // catches all messages outputed to the console
             page.onConsoleMessage = function(msg, line, source) {
