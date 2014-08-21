@@ -119,21 +119,23 @@ function handlePage(url) {
             console.log('Processing: ' + url);
             console.log('------------------------------------------');
 
-            // Add jQuery only if it's not already loaded
-            var jqueryLoaded = page.evaluate(function() {
+            // Add jQuery for almost all the cases
+            var jqueryVersion = page.evaluate(function() {
                 if (window.jQuery) {  
-                    return true;
+                    return window.jQuery.fn.jquery;
                 }
-                return false;
+                return null;
             });
 
-            if (!jqueryLoaded) {
+            var jqueryVersionsToSkip = ['1.10.2'];
+
+            if(jqueryVersionsToSkip.indexOf(jqueryVersion) === -1) {
                 page.injectJs('js-libs/jquery-2.1.1.min.js');
             }
 
             // catches all messages outputed to the console
             page.onConsoleMessage = function(msg, line) {
-                console.log('console> ' + msg + ', line: ' + line);
+                console.log('console> ' + msg + ', line: ' + line + ', page: ' + page.url);
             };
 
             var screenshotPath = 'screenshots/' + url.replace(/[^\w\s!?]/g,'') + '.png';
@@ -146,6 +148,7 @@ function handlePage(url) {
                 var cssRequests = [];
                 var cssContents = [];
                 var pageData = {};
+                var $ = jQuery;
 
                 function cssIsReachable(cssUrl) {
                     // TODO: How to deal with unreachable CSS files???
@@ -194,10 +197,7 @@ function handlePage(url) {
                             url: cssUrl,
                             cache: false,
                             crossDomain: true,
-                            async: false,
-                            xhrFields: {
-                               withCredentials: true
-                            }
+                            async: false
                         });
 
                         cssRequests.push(request);
@@ -244,6 +244,7 @@ function handlePage(url) {
  * @param {array} attributes
  */
 var handlePageData = function(page, url, cssContents, attributes) {
+    var $ = jQuery;
     var pageData = {};
     var html = page.content;
     var cleanHtml = $(document.documentElement).clone().find("script,noscript,style,link,meta,head").remove().end().html();

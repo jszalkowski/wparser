@@ -11,7 +11,7 @@ import webcolors
 all = []
  
 def wparser():
-    command = [PHANTOMJS_DIRECTORY + 'phantomjs', 'wparser.js', CSV_PATH]
+    command = [PHANTOMJS_DIRECTORY + 'phantomjs', '--web-security=no', 'wparser.js', CSV_PATH]
     p = subprocess.Popen(command, cwd=WPARSER_DIRECTORY, shell=False)
     p.communicate()
     return p.returncode
