@@ -127,7 +127,7 @@ function handlePage(url) {
                 return null;
             });
 
-            var jqueryVersionsToSkip = ['1.10.2'];
+            var jqueryVersionsToSkip = ['1.10.2', '1.11.1', '1.4.4', '1.9.1'];
 
             if(jqueryVersionsToSkip.indexOf(jqueryVersion) === -1) {
                 page.injectJs('js-libs/jquery-2.1.1.min.js');

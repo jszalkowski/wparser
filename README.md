@@ -225,3 +225,4 @@ Output is CSV file named output_final.csv, which you'll find in output' director
 * Parser still has problems with getting some CSS files (cross domain requests). I still didn't found any proper way to get CSS files. Maybe this can be handled with some external service written in python or something like that?
 * Parser also has problems with some JS that it tries to compile from received urls - still don't know how to properly handle this
 * use confess.js to get a list of requests etc - https://github.com/jamesgpearce/confess
+* return error when site cannot be processed after some time
