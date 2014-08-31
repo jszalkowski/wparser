@@ -436,7 +436,7 @@ var handlePageData = function(page, url, cssContents, attributes) {
 
     pageData['conditional_comments'] = html.indexOf('<!--[if') > -1;
 
-    pageData['included_multimedia'] = $('video, embed, object, audio, source').length;
+    pageData['included_multimedia'] = $('video, embed, object, audio, source').length > 0;
 
     // TODO: Don't know how
     //pageData['sprite_images'] = (function() {
