@@ -9,3 +9,6 @@ config.py
 
 # custom files
 input/websites_list.csv
+
+# editor
+.idea/
