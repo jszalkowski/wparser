@@ -332,7 +332,7 @@ var handlePageData = function(page, url, cssContents, attributes) {
         return classes.length;
     }());
 
-    pageData['css_external'] = $('link[type="text/css"]').length;
+    pageData['css_external'] = $('link[type="text/css"], link[type="stylesheet"]').length;
 
     pageData['css_internal'] = $('style').length;
 
